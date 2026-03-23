@@ -21,7 +21,7 @@ exports.config = {
     // of the config file unless it's absolute.
     //
     specs: [
-        // ToDo: define location for spec files here
+        './../test/**/*.js'
     ],
     // Patterns to exclude.
     exclude: [
@@ -50,9 +50,14 @@ exports.config = {
     // https://saucelabs.com/platform/platform-configurator
     //
     capabilities: [{
-        browserName: 'firefox'
+        maxInstances: 1,
+        browserName: 'firefox',
+        acceptInsecureCerts: true
+
     }, {
-        browserName: 'MicrosoftEdge'
+        maxInstances: 1,
+        browserName: 'MicrosoftEdge',
+        acceptInsecureCerts: true
     }],
 
     //
@@ -86,7 +91,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    // baseUrl: 'http://localhost:8080',
+    baseUrl: 'https://www.saucedemo.com',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -111,7 +116,7 @@ exports.config = {
     // Make sure you have the wdio adapter package for the specific framework installed
     // before running any tests.
     framework: 'mocha',
-    
+
     //
     // The number of times to retry the entire specfile when it fails as a whole
     // specFileRetries: 1,
