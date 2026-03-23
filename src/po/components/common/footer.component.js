@@ -13,6 +13,5 @@ class FooterComponent extends BaseComponent {
     };
     return $(socialLinks[link]);
   }
-
 }
 module.exports = FooterComponent;

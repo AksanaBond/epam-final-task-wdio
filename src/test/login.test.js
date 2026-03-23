@@ -11,5 +11,4 @@ describe('UC-1: Product Details Verification', () => {
     await loginPage.inputcomponent.form_input('submit').click();
     await expect(browser).toHaveUrl(expect.stringContaining('inventory.html'));
   });
-
 });
