@@ -1,14 +1,15 @@
-const BaseComponent = require("../common/base.component");
+const BaseComponent = require('../common/base.component');
 
 class InputComponent extends BaseComponent {
   constructor() {
-    super(".login-box");
+    super('.login-box');
   }
+
   form_input(param) {
     const inputs = {
       username: '[data-test="username"]',
       password: '[data-test="password"]',
-      submit: '[data-test="login-button"]'
+      submit: '[data-test="login-button"]',
     };
     return $(inputs[param.toLowerCase()]);
   }

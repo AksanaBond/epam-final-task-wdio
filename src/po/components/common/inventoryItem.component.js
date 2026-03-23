@@ -1,9 +1,10 @@
-const BaseComponent = require("./base.component");
+const BaseComponent = require('./base.component');
 
 class InventoryItemComponent extends BaseComponent {
   constructor() {
     super('[data-test="inventory-container"]');
   }
+
   socialLink(link) {
     const socialLinks = {
       twitter: '[data-test="social-twitter"]',
