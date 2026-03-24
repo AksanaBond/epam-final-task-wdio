@@ -1,3 +1,5 @@
 node_modules/
 wdio.conf.js
 .husky/
+allure-results/
+allure-report/
