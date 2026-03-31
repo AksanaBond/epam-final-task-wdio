@@ -12,5 +12,13 @@ class InventoryPage extends BasePage {
     const rootSelector = `//div[@data-test="inventory-item" and .//*[contains(text(), "${itemName}")]]`;
     return new ItemComponent(rootSelector);
   }
+
+  async scroll() {
+    await this.footer.rootEl.scrollIntoView();
+  }
+
+  async openProductDetails(productName) {
+    await this.item(productName).getDetail('title').click();
+  }
 }
 module.exports = InventoryPage;

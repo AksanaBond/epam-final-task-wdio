@@ -8,5 +8,13 @@ class DetailsPage extends BasePage {
     this.footer = new FooterComponent();
     this.product = new ItemComponent('div[data-test="inventory-item"]');
   }
+
+  get cartBadge() {
+    return $('[data-test="shopping-cart-badge"]');
+  }
+
+  async addToCart() {
+    await this.product.getDetail('addToCartBtn').click();
+  }
 }
 module.exports = DetailsPage;

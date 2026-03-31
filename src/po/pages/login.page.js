@@ -6,5 +6,11 @@ class LoginPage extends BasePage {
     super('/');
     this.inputcomponent = new InputComponent();
   }
+
+  async login(username, password) {
+    await this.inputcomponent.form_input('username').setValue(username);
+    await this.inputcomponent.form_input('password').setValue(password);
+    await this.inputcomponent.form_input('submit').click();
+  }
 }
 module.exports = LoginPage;

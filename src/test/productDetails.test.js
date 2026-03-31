@@ -7,31 +7,32 @@ const logger = new Logger();
 const inventoryPage = new InventoryPage();
 const loginPage = new LoginPage();
 const detailsPage = new DetailsPage();
+
 describe('UC-1: Product Details Verification', () => {
   beforeEach(async () => {
     await loginPage.open();
-  });
-  it('should verify product price and description on details page', async () => {
     logger.info('Logging in as standard_user...');
-    await loginPage.inputcomponent.form_input('username').setValue('standard_user');
-    await loginPage.inputcomponent.form_input('password').setValue('secret_sauce');
-    await loginPage.inputcomponent.form_input('submit').click();
-    await expect(browser).toHaveUrl(expect.stringContaining('inventory.html'));
+    await loginPage.login('standard_user', 'secret_sauce');
+  });
+
+  it('should verify product price and description on details page', async () => {
     const productName = 'Sauce Labs Fleece Jacket';
-    logger.info(`Starting verification for product: "${productName}"`);
+
+    logger.info(`[GIVEN] User is on inventory page. Gathering data for product: "${productName}"`);
     const targetItem = inventoryPage.item(productName);
     const expectedPrice = await targetItem.getDetail('price').getText();
     const expectedDesc = await targetItem.getDetail('description').getText();
-    logger.info('Navigating to product details page...');
-    await inventoryPage.item('Sauce Labs Fleece Jacket').getDetail('title').click();
-    logger.info('Verifying price and description...');
+
+    logger.info('[WHEN] User navigates to product details page and adds it to the cart');
+    await inventoryPage.openProductDetails(productName);
+    await detailsPage.addToCart();
+
+    logger.info('[THEN] URL changes to item page, product details match, and cart badge updates to 1');
+    await expect(browser).toHaveUrl(expect.stringContaining('inventory-item.html'));
     await expect(detailsPage.product.getDetail('description')).toHaveText(expectedDesc);
     await expect(detailsPage.product.getDetail('price')).toHaveText(expectedPrice);
-    logger.info('Adding product to cart...');
-    await detailsPage.product.getDetail('addToCartBtn').click();
-    logger.info('Verifying cart badge update...');
-    const cartBadge = await $('[data-test="shopping-cart-badge"]');
-    await expect(cartBadge).toHaveText('1');
+    await expect(detailsPage.cartBadge).toHaveText('1');
+
     logger.info('Test completed successfully!');
   });
 });
